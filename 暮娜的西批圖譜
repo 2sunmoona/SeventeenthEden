@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>第十七個伊甸</title>
+  <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+
+  <style>
+    body { font-family: sans-serif; }
+    #network { width: 70%; height: 800px; border: 1px solid #ddd; }
+  </style>
+</head>
+
+<body>
+  <h2>第十七個伊甸</h2>
+
+  <div style="display: flex;">
+    <div id="network"></div>
+
+    <div id="info" style="width:30%; padding:10px; border-left:1px solid gray;"></div>
+  </div>
+
+<script>
+
+/* 預設 */
+
+var defaultInfoHTML = `
+  <h3>暮娜牌沙拉碗食用導覽</h3>
+  <p>前言<br>
+<br>
+我是祂所造的飛鳥走獸，是貼地而行、以腹為足的蛇。<br>
+我是亞當，流經貧瘠的底格里斯與幼發拉底；我是夏娃，晝夜天地間記錄萬物誕與滅。食惡果使善惡在我內分裂，被逐出伊甸，背負知曉的重量行於荒寂。<br>
+縱使門閉火立、榮光遠去，你仍是我骨中的骨，肉中的肉。此非起初的命定，乃流放之後不肯熄滅的誓。<br>
+ <br>
+ <br>
+個人網站 <br>
+<a href="https://marbled-crowberry-fd9.notion.site/MOONANOTE-19ec45c8cb1180f1968df3f5e8b3b9ba?source=copy_link" target="_blank">
+  https://marbled-crowberry-fd9.notion.site/MOONANOTE-19ec45c8cb1180f1968df3f5e8b3b9ba
+</a><br>
+<br>
+<br>
+
+很髒，快跑。
+ <br>
+ <br>
+
+update:2026.4.14</p>
+`;
+
+document.getElementById("info").innerHTML = defaultInfoHTML;
+
+
+/* 節點 */
+ 
+const rawNodes = [
+  [1, "S.C", "95"],
+  [2, "JH", "95"],
+  [3, "Josh", "95"],
+
+  [5, "HS", "96"],
+  [6, "WW", "96"],
+  [7, "WZ", "96"],
+
+  [9, "MG", "97"],
+  [10, "DK", "97"],
+
+  [11, "SK", "doremi"],
+  [12, "VN", "doremi"],
+  [13, "DN", "doremi"]
+];
+
+var nodes = new vis.DataSet(
+  rawNodes.map(([id, label, group]) => ({ id, label, group }))
+);
+
+
+/* 連線 */
+
+const rawEdges = [
+  [1,2],[1,3],[1,5],[1,6],[1,7],[1,9],
+  [2,3],[2,6],[2,10],
+  [3,12],
+  [5,7],[5,10],[5,11],[5,13],
+  [6,7],[6,9],
+  [7,9],[7,10],[7,13],
+  [9,10],[9,11],[9,13],
+  [10,11],
+  [11,12],[11,13]
+];
+
+var edges = new vis.DataSet(
+  rawEdges.map(([from,to]) => ({ from, to }))
+);
+
+
+/* 節點資料 */
+
+var infoData = {
+  1: {
+    cpList: [
+      { cp: "95line", desc: "喆漢喆/秀喆，總之就是喜歡看濃眉大眼壯受" },
+      { cp: "三隊長", desc: "生生世世命運般糾纏的純愛，無差" },
+      { cp: "慶尚道", desc: "大哥們或鄉下土包子，回家種田的慶尚式純愛，無差" },
+      { cp: "CxM", desc: "好大，巧克力配牛奶，無差但比較喜歡蘸牛奶吃" }
+    ]
+  },
+
+  2: {
+    cpList: [
+      { cp: "95line", desc: "喆漢喆/漢知漢，我也不知道了你們三個都0.5，非常典型and非常完美的長髮美人攻" },
+      { cp: "DKxJH", desc: "會跟年下一起幼稚的溫柔大葛格" },
+      { cp: "JxW", desc: "太陰濕男鬼了，好愛好愛，無差" }
+    ]
+  },
+
+  3: {
+    cpList: [
+      { cp: "95line", desc: "秀喆/漢知漢，跟尹一樣美人攻" },
+      { cp: "USA", desc: "2-1=0 美式純愛" }
+    ]
+  },
+
+  5: {
+    cpList: [
+      { cp: "三隊長", desc: "生生世世命運般糾纏的純愛，無差" },
+      { cp: "豪雨", desc: "無三隊長前提，男高中生純愛，一樣無差" },
+      { cp: "BSS", desc: "社畜們的辦公室戀愛，彼此的前任的前任的前任，無差" },
+      { cp: "主舞s", desc: "純燦純，不純愛關係中的純愛，夜店遇到的那種，aka炮友" }
+    ]
+  },
+
+  6: {
+    cpList: [
+      { cp: "JxW", desc: "太陰濕男鬼了，好愛好愛，無差" },
+      { cp: "慶尚道", desc: "大哥們或鄉下土包子，回家種田的慶尚式純愛，無差" },
+      { cp: "合租室友", desc: "玟佑玟無差" }
+    ]
+  },
+
+  7: {
+    cpList: [
+      { cp: "慶尚道", desc: "大哥們或鄉下土包子，回家種田的慶尚式純愛，無差" },
+      { cp: "三隊長", desc: "生生世世命運般糾纏的純愛，無差" },
+      { cp: "豪雨", desc: "無三隊長前提，男高中生純愛，一樣無差" },
+      { cp: "投補", desc: "DKxWZ 不逆，年下小狗攻，純愛，甜的" },
+      { cp: "oreo", desc: "MGxWZxDK 香草夾心餅乾，年下小狗攻*2，另一種純愛，色的 " }
+
+    ]
+  },
+
+  9: {
+    cpList: [
+      { cp: "CxM", desc: "好大，巧克力配牛奶，無差但比較喜歡蘸牛奶吃" },
+      { cp: "合租室友", desc: "玟佑玟無差" },
+      { cp: "oreo", desc: "MGxWZxDK 香草夾心餅乾，年下小狗攻*2 " },
+      { cp: "同年級三角", desc: "奎碩/奎寛奎，本來吃寛奎但發現主流奎寛太多，通常不純愛" }
+
+    ]
+  },
+
+  10: {
+    cpList: [
+      { cp: "DKxJH", desc: "會跟年下一起幼稚的溫柔大葛格" },
+      { cp: "投補", desc: "DKxWZ 不逆，年下小狗攻，純愛，甜的" },
+      { cp: "oreo", desc: "MGxWZxDK 香草夾心餅乾，年下小狗攻*2，另一種純愛，色的 " },
+      { cp: "同年級三角", desc: "奎碩/碩寛，不逆，通常不純愛" }
+    ]
+  },
+
+  11: {
+    cpList: [
+      { cp: "同年級三角", desc: "奎寛奎/碩寛，不逆，通常不純愛" },
+      { cp: "DoReMi", desc: "率寛/寛燦寛，小孩子們家家酒純愛" }
+
+    ]
+  },
+
+  12: {
+    cpList: [
+      { cp: "DoReMi", desc: "率寛/率燦率，小孩子們家家酒純愛" },
+      { cp: "USA", desc: "2-1=0 美式純愛" }
+    ]
+  },
+
+  13: {
+    cpList: [
+      { cp: "純燦純", desc: "不純愛關係中的純愛，夜店遇到的那種，aka炮友" },
+      { cp: "燦勳", desc: "不逆，三弟很喜歡哥哥每晚幫他加熱的那杯牛奶，偽骨科" },
+      { cp: "DoReMi", desc: "寛燦寛/率燦率，小孩子們家家酒純愛，無差" }
+    ]
+  }
+};
+
+
+/* 顏色 */
+
+var groups = {
+  95:{ color: { background: "#ff9999", border: "#cc6666" } },
+  96:{ color: { background: "#99ccff", border: "#6699cc" } },
+  97:{ color: { background: "#ffcc99", border: "#cc9966" } },
+  doremi:{ color: { background: "#dddddd", border: "#999999" } }
+};
+
+
+/* 建立網路 */
+
+var container = document.getElementById("network");
+
+var data = { nodes, edges };
+
+var options = {
+  groups,
+  nodes: { chosen:false, fixed:false },
+  edges: { smooth:false },
+  physics: { enabled:true, stabilization:false },
+  interaction: { dragNodes:true, dragView:true, zoomView:true, selectable:true }
+};
+
+var network = new vis.Network(container, data, options);
+
+
+/* 效果 */
+
+function resetView() {
+  nodes.forEach(n => nodes.update({ id: n.id, opacity: 1 }));
+  edges.forEach(e => edges.update({ id: e.id, opacity: 1, width: 1 }));
+}
+
+function focusNode(id) {
+  const connected = new Set(network.getConnectedNodes(id).concat(id));
+
+  nodes.forEach(n => {
+    nodes.update({
+      id: n.id,
+      opacity: connected.has(n.id) ? 1 : 0.1
+    });
+  });
+
+  edges.forEach(e => {
+    const isRelated =
+      connected.has(e.from) &&
+      connected.has(e.to);
+
+    edges.update({
+      id: e.id,
+      opacity: isRelated ? 1 : 0.05,
+      width: isRelated ? 4 : 1
+    });
+  });
+}
+
+
+/* 點擊事件 */
+
+network.on("click", function (params) {
+
+  if (params.nodes.length > 0) {
+
+    var id = params.nodes[0];
+    var node = nodes.get(id);
+    var info = infoData[id];
+
+    focusNode(id);
+
+    if (info) {
+
+      var html = "<h2>" + node.label + "</h2>";
+
+      html += info.cpList.map(item => `
+        <p><b>CP：</b>${item.cp}</p>
+        <p>${item.desc}</p><hr>
+      `).join("");
+
+      document.getElementById("info").innerHTML = html;
+
+    } else {
+      document.getElementById("info").innerHTML =
+        "<p>這個角色還沒有資料</p>";
+    }
+
+  } else {
+    resetView();
+    document.getElementById("info").innerHTML = defaultInfoHTML;
+  }
+});
+</script>
+
+</body>
+</html>
