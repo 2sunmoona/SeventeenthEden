@@ -12,17 +12,18 @@
   <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
 
   <style>
-*{box-sizing:border-box}body{margin:0;background:#f5f5f7;font-family:"Noto Sans TC",sans-serif;color:#333;line-height:1.8}
-h2{text-align:center;padding:24px;margin:0}
-.layout{display:flex;gap:24px;width:min(1400px,95%);margin:0 auto 24px}
-#network{flex:2;height:80vh;background:#fff;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
-#info{flex:1;padding:24px;background:#fff;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.08);overflow:auto;max-height:80vh}
-.cp-card{background:#fafafa;border-left:5px solid #000000;padding:14px;border-radius:10px;margin-bottom:16px}
-#info blockquote{border-left:4px solid #ccc;padding-left:12px;color:#666}
-#info code{background:#eee;padding:2px 5px;border-radius:4px}
-#info img{max-width:100%}
-@media(max-width:900px){.layout{flex-direction:column}#network{height:55vh}#info{max-height:none}}
-</style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f5f7; font-family: "Noto Sans TC", sans-serif; color: #333; line-height: 1.8; }
+    h2 { text-align: center; padding: 24px; margin: 0; }
+    .layout { display: flex; gap: 24px; width: min(1400px, 95%); margin: 0 auto 24px; }
+    #network { flex: 2; height: 80vh; background: #fff; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+    #info { flex: 1; padding: 24px; background: #fff; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,.08); overflow: auto; max-height: 80vh; }
+    .cp-card { background: #fafafa; border-left: 5px solid #000000; padding: 14px; border-radius: 10px; margin-bottom: 16px; }
+    #info blockquote { border-left: 4px solid #ccc; padding-left: 12px; color: #666; }
+    #info code { background: #eee; padding: 2px 5px; border-radius: 4px; }
+    #info img { max-width: 100%; }
+    @media(max-width:900px) { .layout { flex-direction: column; } #network { height: 55vh; } #info { max-height: none; } }
+  </style>
 </head>
 
 <body>
@@ -30,13 +31,10 @@ h2{text-align:center;padding:24px;margin:0}
 
   <div class="layout">
     <div id="network"></div>
-
     <div id="info"></div>
   </div>
 
 <script>
-
-
 var defaultInfoHTML = `
   <h3>前言</h3>
 RPS向，一切都是我腦內的幻想。主吃碩寛、美國賴、95三角，其他就是路過吃一口，有興趣再繼續看...
@@ -44,15 +42,13 @@ RPS向，一切都是我腦內的幻想。主吃碩寛、美國賴、95三角，
 很髒，快跑。
 <br>
 <br>
-<h3>MOONANOTE</h3>
-<br>
+  <h3>MOONANOTE</h3>
 <a href="https://marbled-crowberry-fd9.notion.site/MOONANOTE-19ec45c8cb1180f1968df3f5e8b3b9ba?source=copy_link" target="_blank">
   https://marbled-crowberry-fd9.notion.site/MOONANOTE-19ec45c8cb1180f1968df3f5e8b3b9ba
 </a><br>
 <br>
 <br>
-
-update:2026.7.7</p>
+<p>update:2026.7.7</p>
 `;
 
 document.getElementById("info").innerHTML = defaultInfoHTML;
@@ -61,14 +57,11 @@ const rawNodes = [
   [1, "S.C", "95"],
   [2, "JH", "95"],
   [3, "Josh", "95"],
-
   [5, "HS", "96"],
   [6, "WW", "96"],
   [7, "WZ", "96"],
-
   [9, "MG", "97"],
   [10, "DK", "97"],
-
   [11, "SK", "doremi"],
   [12, "VN", "doremi"],
   [13, "DN", "doremi"]
@@ -101,7 +94,6 @@ var infoData = {
       { cp: "CxM", desc: "好大，巧克力配牛奶，無差但比較喜歡蘸牛奶吃" }
     ]
   },
-
   2: {
     cpList: [
       { cp: "95line", desc: "漢喆/尹洪，非常典型and非常完美的長髮美人攻，~~我也不知道了你們三個都0.5~~" },
@@ -109,14 +101,12 @@ var infoData = {
       { cp: "JxW", desc: "太陰濕男鬼了，好愛好愛，無差" }
     ]
   },
-
   3: {
     cpList: [
       { cp: "95line", desc: "秀喆/尹洪，跟尹一樣美人攻" },
       { cp: "USA", desc: "2-1=0 american breakfast 美式純愛" }
     ]
   },
-
   5: {
     cpList: [
       { cp: "豪雨", desc: "男高中生純愛，~~屁孩~~" },
@@ -124,32 +114,26 @@ var infoData = {
       { cp: "主舞s", desc: "純燦純，不純愛關係中的純愛，夜店遇到的那種，~~aka炮友~~" }
     ]
   },
-
   6: {
     cpList: [
       { cp: "JxW", desc: "太陰濕男鬼了，好愛好愛" },
       { cp: "慶尚道", desc: "大哥們或鄉下土包子，回家種田的慶尚式純愛，無差" },
     ]
   },
-
   7: {
     cpList: [
       { cp: "慶尚道", desc: "大哥們或鄉下土包子，回家種田的慶尚式純愛，無差" },
       { cp: "豪雨", desc: "男高中生純愛，~~屁孩~~" },
       { cp: "投補", desc: "DKxWZ 不逆，年下小狗攻，純愛，甜的" },
-
     ]
   },
-
   9: {
     cpList: [
       { cp: "CxM", desc: "好大，巧克力配牛奶，無差但比較喜歡蘸牛奶吃" },
       { cp: "同年級三角", desc: "奎碩/寛奎，左右有意義，通常不純愛" },
       { cp: "放送高三角", desc: "奎寛燦無差" }
-
     ]
   },
-
   10: {
     cpList: [
       { cp: "漢碩", desc: "無差但通常狗在右邊，會跟年下一起幼稚的溫柔大葛格" },
@@ -157,37 +141,33 @@ var infoData = {
       { cp: "同年級三角", desc: "奎碩/碩寛，左右有意義，通常不純愛" },
     ]
   },
-
   11: {
     cpList: [
       { cp: "同年級三角", desc: "碩寛/寛奎，左右有意義，通常不純愛" },
       { cp: "放送高三角", desc: "奎寛燦無差" },
     ]
   },
-
   12: {
     cpList: [
       { cp: "USA", desc: "2-1=0 american breakfast 美式純愛" }
     ]
   },
-
   13: {
     cpList: [
-      { cp: "純燦純", desc: "不純愛關係中的純愛，夜店遇到的那種，~~aka炮友~~" },
+      { cp: "主舞s", desc: "不純愛關係中的純愛，夜店遇到的那種，~~aka炮友~~" },
       { cp: "放送高三角", desc: "奎寛燦無差" },
     ]
   }
 };
 
 var groups = {
-  95:{ color: { background: "#AD5A5A", border: "#613030" } },
-  96:{ color: { background: "#5CADAD", border: "#336666" } },
-  97:{ color: { background: "#A5A552", border: "#616130" } },
-  doremi:{ color: { background: "#8080C0", border: "#484891" } }
+  95:{ color: { background: "#9E7777", border: "#9E6767" } },
+  96:{ color: { background: "#9E9E77", border: "#9E9E67" } },
+  97:{ color: { background: "#779E9E", border: "#679E9E" } },
+  doremi:{ color: { background: "#77779E", border: "#67679E" } }
 };
 
 var container = document.getElementById("network");
-
 var data = { nodes, edges };
 
 var options = {
@@ -199,7 +179,6 @@ var options = {
 };
 
 var network = new vis.Network(container, data, options);
-  
 
 function resetView() {
   nodes.forEach(n => nodes.update({ id: n.id, opacity: 1 }));
@@ -217,10 +196,7 @@ function focusNode(id) {
   });
 
   edges.forEach(e => {
-    const isRelated =
-      connected.has(e.from) &&
-      connected.has(e.to);
-
+    const isRelated = connected.has(e.from) && connected.has(e.to);
     edges.update({
       id: e.id,
       opacity: isRelated ? 1 : 0.05,
@@ -229,34 +205,48 @@ function focusNode(id) {
   });
 }
 
+// 點擊事件監聽
 network.on("click", function (params) {
-
   if (params.nodes.length > 0) {
-
     var id = params.nodes[0];
     var node = nodes.get(id);
     var info = infoData[id];
 
+    // 1. 調整關係圖透明度與高亮
     focusNode(id);
 
+    // 2. 視角平滑聚焦到點擊的節點
+    network.focus(id, { 
+      scale: 1.2, 
+      animation: { 
+        duration: 500,               
+        easingFunction: "easeInOutQuad" 
+      } 
+    });
+
+    // 3. 渲染右側詳細資料
     if (info) {
-
       var html = "<h2>" + node.label + "</h2>";
-
       html += info.cpList.map(item => `
         <div class="cp-card"><h3>${item.cp}</h3>${DOMPurify.sanitize(marked.parse(item.desc))}</div>
       `).join("");
-
       document.getElementById("info").innerHTML = html;
-
     } else {
-      document.getElementById("info").innerHTML =
-        "<p>這個角色還沒有資料</p>";
+      document.getElementById("info").innerHTML = "<p>這個角色還沒有資料</p>";
     }
 
   } else {
+    // 點擊空白處重置透明度
     resetView();
     document.getElementById("info").innerHTML = defaultInfoHTML;
+
+    // 點擊空白處自動將視角縮回、置中看全景
+    network.fit({
+      animation: {
+        duration: 500,
+        easingFunction: "easeInOutQuad"
+      }
+    });
   }
 });
 </script>
