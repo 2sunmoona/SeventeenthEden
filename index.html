@@ -122,7 +122,7 @@ var infoData = {
     cpList: [
       { cp: "慶尚道", desc: "大哥們或鄉下土包子，回家種田的慶尚式純愛，無差" },
       { cp: "豪雨", desc: "男高中生純愛，~~屁孩~~" },
-      { cp: "投補", desc: "DKxWZ 不逆，年下小狗攻，純愛，甜的" },
+      { cp: "碩勳", desc: "投補&戀與製作人，無差但喜歡年下小狗攻，純愛，甜的" },
     ]
   },
   9: {
@@ -135,7 +135,7 @@ var infoData = {
   10: {
     cpList: [
       { cp: "漢碩", desc: "無差但通常狗在右邊，會跟年下一起幼稚的溫柔大葛格" },
-      { cp: "投補", desc: "DKxWZ 不逆，年下小狗攻，純愛，甜的" },
+      { cp: "碩勳", desc: "投補&戀與製作人，無差但喜歡年下小狗攻，純愛，甜的" },
       { cp: "同年級三角", desc: "奎碩/碩寛，左右有意義，通常不純愛" },
     ]
   },
@@ -210,10 +210,10 @@ network.on("click", function (params) {
     var node = nodes.get(id);
     var info = infoData[id];
 
-    // 1. 調整關係圖透明度與高亮
+    // 調整明亮
     focusNode(id);
 
-    // 2. 視角平滑聚焦到點擊的節點
+    // 平滑移動
     network.focus(id, { 
       scale: 1.2, 
       animation: { 
@@ -222,7 +222,6 @@ network.on("click", function (params) {
       } 
     });
 
-    // 3. 渲染右側詳細資料
     if (info) {
       var html = "<h2>" + node.label + "</h2>";
       html += info.cpList.map(item => `
@@ -234,11 +233,9 @@ network.on("click", function (params) {
     }
 
   } else {
-    // 點擊空白處重置透明度
     resetView();
     document.getElementById("info").innerHTML = defaultInfoHTML;
 
-    // 點擊空白處自動將視角縮回、置中看全景
     network.fit({
       animation: {
         duration: 500,
