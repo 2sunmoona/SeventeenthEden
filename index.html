@@ -40,12 +40,12 @@ var defaultInfoHTML = `
 </a><br>
 <br>
 <br>
-
+RPS向，一切都是我腦內的幻想。
 很髒，快跑。
  <br>
  <br>
 
-update:2026.4.14</p>
+update:2026.7.7</p>
 `;
 
 document.getElementById("info").innerHTML = defaultInfoHTML;
@@ -99,7 +99,7 @@ var edges = new vis.DataSet(
 var infoData = {
   1: {
     cpList: [
-      { cp: "95line", desc: "喆漢喆/秀喆，總之就是喜歡看濃眉大眼壯受" },
+      { cp: "95line", desc: "漢喆/秀喆，總之就是喜歡看濃眉大眼壯受" },
       { cp: "三隊長", desc: "生生世世命運般糾纏的純愛，無差" },
       { cp: "慶尚道", desc: "大哥們或鄉下土包子，回家種田的慶尚式純愛，無差" },
       { cp: "CxM", desc: "好大，巧克力配牛奶，無差但比較喜歡蘸牛奶吃" }
@@ -108,33 +108,32 @@ var infoData = {
 
   2: {
     cpList: [
-      { cp: "95line", desc: "喆漢喆/漢知漢，我也不知道了你們三個都0.5，非常典型and非常完美的長髮美人攻" },
-      { cp: "DKxJH", desc: "會跟年下一起幼稚的溫柔大葛格" },
+      { cp: "95line", desc: "漢喆/尹洪，非常典型and非常完美的長髮美人攻，我也不知道了你們三個都0.5" },
+      { cp: "漢碩", desc: "無差但通常狗在右邊，會跟年下一起幼稚的溫柔大葛格" },
       { cp: "JxW", desc: "太陰濕男鬼了，好愛好愛，無差" }
     ]
   },
 
   3: {
     cpList: [
-      { cp: "95line", desc: "秀喆/漢知漢，跟尹一樣美人攻" },
-      { cp: "USA", desc: "2-1=0 美式純愛" }
+      { cp: "95line", desc: "秀喆/尹洪，跟尹一樣美人攻" },
+      { cp: "USA", desc: "2-1=0 american breakfast 美式純愛" }
     ]
   },
 
   5: {
     cpList: [
       { cp: "三隊長", desc: "生生世世命運般糾纏的純愛，無差" },
-      { cp: "豪雨", desc: "無三隊長前提，男高中生純愛，一樣無差" },
-      { cp: "BSS", desc: "社畜們的辦公室戀愛，彼此的前任的前任的前任，無差" },
+      { cp: "豪雨", desc: "無三隊長前提，男高中生純愛，屁孩" },
+      { cp: "BSS", desc: "社畜們的辦公室戀愛，彼此的前任的前任的前任" },
       { cp: "主舞s", desc: "純燦純，不純愛關係中的純愛，夜店遇到的那種，aka炮友" }
     ]
   },
 
   6: {
     cpList: [
-      { cp: "JxW", desc: "太陰濕男鬼了，好愛好愛，無差" },
+      { cp: "JxW", desc: "太陰濕男鬼了，好愛好愛" },
       { cp: "慶尚道", desc: "大哥們或鄉下土包子，回家種田的慶尚式純愛，無差" },
-      { cp: "合租室友", desc: "玟佑玟無差" }
     ]
   },
 
@@ -152,9 +151,8 @@ var infoData = {
   9: {
     cpList: [
       { cp: "CxM", desc: "好大，巧克力配牛奶，無差但比較喜歡蘸牛奶吃" },
-      { cp: "合租室友", desc: "玟佑玟無差" },
       { cp: "oreo", desc: "MGxWZxDK 香草夾心餅乾，年下小狗攻*2 " },
-      { cp: "同年級三角", desc: "奎碩/奎寛奎，本來吃寛奎但發現主流奎寛太多，通常不純愛" },
+      { cp: "同年級三角", desc: "奎碩/寛奎，左右有意義，通常不純愛" },
       { cp: "放送高三角", desc: "奎寛燦無差" }
 
     ]
@@ -162,16 +160,16 @@ var infoData = {
 
   10: {
     cpList: [
-      { cp: "DKxJH", desc: "會跟年下一起幼稚的溫柔大葛格" },
+      { cp: "漢碩", desc: "無差但通常狗在右邊，會跟年下一起幼稚的溫柔大葛格" },
       { cp: "投補", desc: "DKxWZ 不逆，年下小狗攻，純愛，甜的" },
       { cp: "oreo", desc: "MGxWZxDK 香草夾心餅乾，年下小狗攻*2，另一種純愛，色的 " },
-      { cp: "同年級三角", desc: "奎碩/碩寛，不逆，通常不純愛" }
+      { cp: "同年級三角", desc: "奎碩/寛奎，左右有意義，通常不純愛" },
     ]
   },
 
   11: {
     cpList: [
-      { cp: "同年級三角", desc: "奎寛奎/碩寛，不逆，通常不純愛" },
+      { cp: "同年級三角", desc: "奎碩/寛奎，左右有意義，通常不純愛" },
       { cp: "放送高三角", desc: "奎寛燦無差" },
       { cp: "DoReMi", desc: "寛率燦，小孩子們家家酒純愛，無差" }
     ]
@@ -180,14 +178,13 @@ var infoData = {
   12: {
     cpList: [
       { cp: "DoReMi", desc: "寛率燦，小孩子們家家酒純愛" },
-      { cp: "USA", desc: "2-1=0 美式純愛" }
+      { cp: "USA", desc: "2-1=0 american breakfast 美式純愛" }
     ]
   },
 
   13: {
     cpList: [
       { cp: "純燦純", desc: "不純愛關係中的純愛，夜店遇到的那種，aka炮友" },
-      { cp: "燦勳", desc: "不逆，三弟很喜歡哥哥每晚幫他加熱的那杯牛奶，偽骨科" },
       { cp: "放送高三角", desc: "奎寛燦無差" },
       { cp: "DoReMi", desc: "寛率燦，小孩子們家家酒純愛，無差" }
     ]
@@ -198,10 +195,10 @@ var infoData = {
 /* 顏色 */
 
 var groups = {
-  95:{ color: { background: "#ff9999", border: "#cc6666" } },
-  96:{ color: { background: "#99ccff", border: "#6699cc" } },
-  97:{ color: { background: "#ffcc99", border: "#cc9966" } },
-  doremi:{ color: { background: "#dddddd", border: "#999999" } }
+  95:{ color: { background: "#AD5A5A", border: "#613030" } },
+  96:{ color: { background: "#5CADAD", border: "#336666" } },
+  97:{ color: { background: "#A5A552", border: "#616130" } },
+  doremi:{ color: { background: "#8080C0", border: "#484891" } }
 };
 
 
